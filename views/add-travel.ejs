@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+    <div class="container" style="max-width: 900px;">
+        <h1>✈️ Saved Destinations</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Destination</th>
+                    <th>Country</th>
+                    <th>Highlight</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if (travels.length > 0) { %>
+                    <% travels.forEach(function(item) { %>
+                        <tr>
+                            <td><img src="<%= item.photoUrl %>" width="80" style="border-radius: 5px;"></td>
+                            <td><strong><%= item.destination %></strong></td>
+                            <td><%= item.country %></td>
+                            <td>✨ <%= item.highlight %></td>
+                            <td>
+                                <a href="/edit/<%= item._id %>" style="color: #007bff; text-decoration: none; font-weight: bold; margin-right: 10px;">Edit</a>
+                                
+                                <form action="/delete/<%= item._id %>" method="POST" style="display:inline;">
+                                    <button type="submit" onclick="return confirm('Delete this destination?')" style="color: #dc3545; border: none; background: none; cursor: pointer; font-weight: bold; padding: 0;">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }); %>
+                <% } else { %>
+                    <tr><td colspan="5" style="text-align:center;">No entries found.</td></tr>
+                <% } %>
+            </tbody>
+        </table>
+        <div style="margin-top: 20px;">
+            <a href="/">← Add Another Destination</a>
+        </div>
+    </div>
+</body>
+</html>
